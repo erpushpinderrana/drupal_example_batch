@@ -55,7 +55,7 @@ class KickOffBatchForm extends FormBase {
           [$number],
         ],
       ],
-      'file' => drupal_get_path('module', 'example_batch') . '/example_batch.awesome_batch.inc',
+      'file' => \Drupal::service('extension.path.resolver')->getPath('module', 'example_batch') . '/example_batch.awesome_batch.inc',
     ];
     batch_set($batch);
   }
