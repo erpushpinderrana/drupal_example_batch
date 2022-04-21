@@ -16,7 +16,7 @@ function _awesome_batch($number, &$context) {
       $number,
       'One random string is listed below:', '@count random strings are listed below:'
     );
-    drupal_set_message($message);
+    \Drupal::messenger()->addMessage($message);
 
     // Initiate multistep processing.
     if (empty($context['sandbox'])) {
@@ -39,7 +39,10 @@ function _awesome_batch($number, &$context) {
 
       // We want to display the counter 1-based, not 0-based.
       $counter = $i + 1;
-      drupal_set_message($counter . '. ' . $code);
+      \Drupal::messenger()->addMessage(t('Counter @counter and str @str', ['@counter' => $counter, '@str' => $code]));
+      
+      // To see the progress of individual batch.
+      $context['message'] = t('Processing @i of @number', ['@i' => $i, '@number' => $number]);
 
       // Update our progress!
       $context['sandbox']['progress']++;
